@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="/templates/assets/favicon.ico">
+        <title>☀️ Weather</title>
+        <style>
+            html{
+                background-color: #11998e;
+                background: linear-gradient(
+                  135deg,
+                  #11998e 0%,
+                  #38ef7d 100%
+                ) no-repeat;
+                font-family: Helvetica;
+                color: #FFFFFF;
+                font-size: 1.1em;
+            }
+            .upper{
+                text-transform: uppercase;
+            }
+            ul{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            #container{
+                text-align: center;
+                width: 50%;
+                margin: 0 auto;
+            }
+            button{
+                background: #757575;
+                border: 1px solid #000000;
+                border-radius: 5px;
+                height: 50px;
+                color: #ffffff;
+            }
+            button:hover{
+                background-color: #BDBDBD;
+            }
+            a, a:visited, a:hover{
+                font-color: black;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Weather for
+                {% if city_name == "Liège" %}
+                    <span class="upper">Liège</span></h1>
+
+                    <p style="font-size: 1.5em">(best city of the whole world!) 🇧🇪</p>
+                {% else %}
+                    <span class="upper">{{ city_name }}</span>
+                {% endif %}
+            </h1>
+            <ul>
+            {% for i in range(5) %}
+                <li>Forecast for: {{ days[i] }}
+                    <ul>
+                        <li>Feels like day: {{ daily[i]["feels_like"]["day"] }}°C</li>
+                        <li>Feels like night: {{ daily[i]["feels_like"]["night"] }}°C</li>
+                        <li>Weather: {{ daily[i]["weather"][0]["main"] }}</li>
+                        <li>
+                            <img alt="Weather icon" width="75"
+                                 src="http://openweathermap.org/img/wn/{{daily[i]["weather"][0]["icon"]}}@2x.png" />
+                        </li>
+                        <br style="color: #FFFFFF" />
+                    </ul>
+                </li>
+            {% endfor %}
+            </ul>
+            <form action="/" method="POST">
+                <input type="text" name="city" placeholder="City" />
+                <button type="submit">Get me the weather</button>
+            </form>
+        </div>
+    </body>
+</html>
