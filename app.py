@@ -21,7 +21,7 @@ def home():
     location = geolocator.geocode(city_name)
 
     # Get JSON
-    key = os.environ['KEY']
+    key = os.getenv('KEY')
     base_url = "https://api.openweathermap.org/data/2.5/onecall?"
     exclude = "minutely,hourly,alerts"
     url = f"{base_url}lat={location.latitude}&lon={location.longitude}&exclude={exclude}&appid={key}&units=metric"
